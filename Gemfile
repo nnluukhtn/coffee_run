@@ -41,3 +41,13 @@ group :development, :test do
   gem 'spring'
 end
 
+# Push notification
+gem 'pusher'
+
+# Data ORM
+gem 'mongoid', '~> 4.0.0'
+# Auto incrementing field for mongoid
+gem 'mongoid-autoinc', '~> 4.0.0'
+
+# Shortener url
+gem 'bitly'

@@ -1,0 +1,12 @@
+development: &defaults
+  admin_username: 'admin'
+  admin_password: 'admin'
+  coffee_run_url: 'http://127.0.0.1:3000'
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+  admin_username: ENV['ADMIN_USERNAME']
+  admin_password: ENV['ADMIN_PASSWORD']
