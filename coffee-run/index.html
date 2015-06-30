@@ -11,7 +11,10 @@
         <script src="js/vendor/modernizr.js"></script>
     </head>
     <body>
-        <header class="header">
+        <header class="row show-for-small text-center mobile-header">
+            <p class="font-book white-color fs14">Cong &amp; Friends Coffee Run</p>
+        </header>
+        <header class="header hide-for-small">
             <div class="site-name left">
                 <p class="font-book white-color fs14">Cong &amp; Friends Coffee Run</p>
             </div>
@@ -20,7 +23,7 @@
             </div>
         </header>
         <div class="row padding-top">
-            <div class="small-12 medium-6 medium-offset-3 columns coffee-run-form">
+            <div class="small-12 medium-8 medium-offset-2 large-6 large-offset-3 columns coffee-run-form">
                 <div class="order-number left">
                     <p class="font-mono fs14 secondary-color">No. <span class="primary-color">0000123</span></p>
                 </div>
@@ -35,11 +38,11 @@
                     <form>
                         <div class="input-field">
                             <label class="fs22 font-book secondary-color">I am</label>
-                            <input class="fs22 font-book secondary-color" type="text" placeholder="What is thy name?"/>
+                            <input class="fs22 font-book secondary-color" type="text" placeholder="What is thy name?" required autofocus/>
                         </div>
                         <div class="input-field">
                             <label class="fs22 font-book secondary-color">And I want a</label>
-                            <input class="fs22 font-book secondary-color" type="text" placeholder="And thou shall drink?"/>
+                            <input class="fs22 font-book secondary-color" type="text" placeholder="And thou shall drink?" required/>
                         </div>
                         <div class="submit-button">
                             <button class="fs22 font-bold primary-color">Go!</button>
@@ -52,7 +55,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="small-12 medium-6 medium-offset-3 columns coffee-run-form ordering-list">
+            <div class="small-12 medium-8 medium-offset-2 large-6 large-offset-3 columns coffee-run-form ordering-list">
                 <p class="font-book fs22 secondary-color lh120"><span class="font-bold primary-color">4 people</span> have placed their orders.<br/>
                 <span class="font-bold primary-color">2 people</span> are still ordering.</p>
 
