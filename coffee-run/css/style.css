@@ -81,7 +81,7 @@ a:focus {
 	box-shadow: none;
 	border-bottom: dashed 1px #D8D8D8;
 	font-size: 22px;
-	font-family: 'MaisonNeueBook';
+	font-family: 'Open Sans';
 	color: #253DD3;
 	margin: 22px 0 0 0;
 }
@@ -183,10 +183,6 @@ footer {
 
 	.fs22 {
 		font-size: 1em;
-	}
-
-	.lh120 {
-		line-height: 150%;
 	}
 
 	.coffee-run-form {
