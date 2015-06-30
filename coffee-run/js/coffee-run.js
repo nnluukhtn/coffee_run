@@ -32,6 +32,11 @@ function validateForm() {
         $('#orderer-name .warning').removeClass('hide');
         isValid = false;
     }
+
+    if (isValid) {
+    	// Remove warning
+    	$('.warning').addClass('hide');
+    }
     
     return isValid;
 }
@@ -44,7 +49,7 @@ function isGibberish(s) {
 
 		This simple algorithm checks the ratio between vows/consonances in an input.
 	*/
-	
+
 	var v=1, c=1, ratio, len, gibberish=false;
 
 	if(typeof s != 'undefined' && s.length) {

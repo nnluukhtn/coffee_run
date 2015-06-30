@@ -248,8 +248,17 @@ footer {
 		font-size: 16px;
 	}
 
+	.input-field .warning {
+		left: auto;
+		right: 0;
+		top: 23px;
+		margin-left: 0;
+		box-shadow: none;
+	}
+
 	.submit-button button {
 		height: 50px;
+		line-height: 0;
 	}
 
 	.expansion-link {
