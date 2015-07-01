@@ -7,6 +7,10 @@ p {
 	margin-bottom: 0;
 }
 
+a:focus {
+	color: #253DD3;
+}
+
 .header {
 	width: 100%;
 	padding-top: 36px;
@@ -51,6 +55,7 @@ p {
 
 .actual-form {
 	width: 100%;
+	margin-top: 16px;
 }
 
 .input-field {
@@ -76,9 +81,57 @@ p {
 	box-shadow: none;
 	border-bottom: dashed 1px #D8D8D8;
 	font-size: 22px;
-	font-family: 'MaisonNeueBook';
+	font-family: 'Open Sans';
 	color: #253DD3;
 	margin: 22px 0 0 0;
+}
+
+.input-field input[type="text"]:focus:invalid {
+	border-bottom: dashed 1px red;
+}
+
+.input-field .warning {
+	height: 20px;
+	width: 20px;
+	border-radius: 100%;
+	background-image: url('../img/warning-icon.svg');
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -290px;
+	margin-top: 3px;
+	-webkit-box-shadow: 4px 4px 0px 0px rgba(0,0,0,0.15);
+	-moz-box-shadow: 4px 4px 0px 0px rgba(0,0,0,0.15);
+	box-shadow: 4px 4px 0px 0px rgba(0,0,0,0.15);
+	cursor: pointer;
+}
+
+.input-field .validation-text {
+	width: 254px;
+	padding: 20px;
+	background-color: white;
+
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -560px;
+	margin-top: 3px;
+
+	-webkit-box-shadow: 8px 8px 0px 0px rgba(0,0,0,0.15);
+	-moz-box-shadow: 8px 8px 0px 0px rgba(0,0,0,0.15);
+	box-shadow: 8px 8px 0px 0px rgba(0,0,0,0.15);
+	border-radius: 2px;
+}
+
+.input-field .validation-text::after {
+	content: "";
+	width: 0;
+	height: 0;
+	border-top: 10px solid white;
+	border-right: 10px solid transparent;
+	position: absolute;
+	top: 10px;
+	right: -10px;
 }
 
 .submit-button button {
@@ -86,7 +139,7 @@ p {
 	height: 70px;
 	background-color: transparent;
 	border: solid 3px #253DD3;
-	margin: 50px 0 0 0;
+	margin: 30px 0 0 0;
 }
 
 .submit-button button:hover {
@@ -149,13 +202,70 @@ p {
 }
 
 .padding-top {
-	padding-top: 50px;
+	padding-top: 80px;
 }
 
 footer {
 	width: 100%;
-	margin-bottom: 10px;
-	position: fixed;
+	margin: 30px auto 10px;
 	bottom: 0;
 	text-align: center;
+}
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 568px) {
+	body {
+		padding: 0 6px;
+	}
+
+	.mobile-header {
+		margin-top: 30px;
+	}
+
+	.padding-top {
+		padding-top: 21px;
+	}
+
+	.fs22 {
+		font-size: 1em;
+	}
+
+	.coffee-run-form {
+		padding: 26px 20px 16px;
+		box-shadow: none;
+	}
+
+	.coffee-run-timer {
+		margin-top: 24px;
+	}
+
+	.actual-form {
+		margin-top: 0;
+	}
+
+	.input-field input[type="text"] {
+		padding-left: 36.5%;
+		padding-top: 4px;
+		font-size: 16px;
+	}
+
+	.input-field .warning {
+		left: auto;
+		right: 0;
+		top: 23px;
+		margin-left: 0;
+		box-shadow: none;
+	}
+
+	.submit-button button {
+		height: 50px;
+		line-height: 0;
+	}
+
+	.expansion-link {
+		margin-top: 10px;
+	}
+
+	.timesup {
+		padding-top: 60px;
+	}
 }

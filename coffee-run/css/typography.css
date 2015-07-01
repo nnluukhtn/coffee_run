@@ -1,50 +1,16 @@
-@font-face {
-    font-family: 'MaisonNeueBook';
-    src: url('../fonts/maisonneuebook.ttf') format('truetype');
-}
-@font-face {
-    font-family: 'MaisonNeueBookItalic';
-    src: url('../fonts/maisonneuebookitalic.ttf') format('truetype');
-}
-@font-face {
-    font-family: 'MaisonNeueBold';
-    src: url('../fonts/maisonneuebold.ttf') format('truetype');
-    font-weight: normal;
-}
-@font-face {
-    font-family: 'MaisonNeueBoldItalic';
-    src: url('../fonts/maisonneuebolditalic.ttf') format('truetype');
-    font-weight: normal;
-}
-@font-face {
-    font-family: 'MaisonNeueMono';
-    src: url('../fonts/maisonneuemono.ttf') format('truetype');
-    font-weight: normal;
-}
-@font-face {
-    font-family: 'MaisonNeueMonoItalic';
-    src: url('../fonts/maisonneuemonoitalic.ttf') format('truetype');
-    font-weight: normal;
-}
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:700,400);
+@import url(http://fonts.googleapis.com/css?family=Roboto+Mono);
 
 /* typeface classes */
 .font-book {
-    font-family: "MaisonNeueBook", "Helvetica Neue", "Helvetica" ,Helvetica, Arial, sans-serif;
-}
-.font-book-italic {
-    font-family: "MaisonNeueBookItalic", "Helvetica Neue", "Helvetica" ,Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", "Helvetica" ,Helvetica, Arial, sans-serif;
 }
 .font-bold {
-    font-family: "MaisonNeueBold", "Helvetica Neue", "Helvetica" ,Helvetica, Arial, sans-serif;
-}
-.font-bold-italic {
-    font-family: "MaisonNeueBoldItalic", "Helvetica Neue", "Helvetica" ,Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", "Helvetica" ,Helvetica, Arial, sans-serif;
+    font-weight: 700;
 }
 .font-mono {
-    font-family: "MaisonNeueMono", "Helvetica Neue", "Helvetica" ,Helvetica, Arial, sans-serif;
-}
-.font-mono-italic {
-    font-family: "MaisonNeueMonoItalic", "Helvetica Neue", "Helvetica" ,Helvetica, Arial, sans-serif;
+    font-family: "Roboto Mono", "Helvetica Neue", "Helvetica" ,Helvetica, Arial, sans-serif;
 }
 
 /* font sizes */
@@ -61,8 +27,8 @@
 }
 
 /* line height */
-.lh120 {
-    line-height: 120%;
+.lh150 {
+    line-height: 150%;
 }
 
 .lh30 {

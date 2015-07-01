@@ -11,7 +11,10 @@
         <script src="js/vendor/modernizr.js"></script>
     </head>
     <body>
-        <header class="header">
+        <header class="row show-for-small text-center mobile-header">
+            <p class="font-book white-color fs14">Cong &amp; Friends Coffee Run</p>
+        </header>
+        <header class="header hide-for-small">
             <div class="site-name left">
                 <p class="font-book white-color fs14">Cong &amp; Friends Coffee Run</p>
             </div>
@@ -20,7 +23,7 @@
             </div>
         </header>
         <div class="row padding-top">
-            <div class="small-12 medium-6 medium-offset-3 columns coffee-run-form">
+            <div class="small-12 medium-8 medium-offset-2 large-6 large-offset-3 columns coffee-run-form">
                 <div class="order-number left">
                     <p class="font-mono fs14 secondary-color">No. <span class="primary-color">0000123</span></p>
                 </div>
@@ -32,17 +35,25 @@
                     <span class="font-mono">04</span> minutes and <span class="font-mono">30</span> seconds.</p>
                 </div>
                 <div class="actual-form left">
-                    <form>
-                        <div class="input-field">
+                    <form id="coffee-form">
+                        <div id="orderer-name" class="input-field">
                             <label class="fs22 font-book secondary-color">I am</label>
-                            <input class="fs22 font-book secondary-color" type="text" placeholder="What is thy name?"/>
+                            <input class="fs22 font-book secondary-color" type="text" placeholder="What is thy name?" autofocus/>
+                            <div class="warning hide"></div>
+                            <div class="validation-text hide">
+                                <p class="font-book fs16 secondary-color">Give me thy name, don't be shy!</p>
+                            </div>
                         </div>
-                        <div class="input-field">
+                        <div id="orderer-beverage" class="input-field">
                             <label class="fs22 font-book secondary-color">And I want a</label>
                             <input class="fs22 font-book secondary-color" type="text" placeholder="And thou shall drink?"/>
+                            <div class="warning hide"></div>
+                            <div class="validation-text hide">
+                                <p class="font-book fs16 secondary-color"></p>
+                            </div>
                         </div>
                         <div class="submit-button">
-                            <button class="fs22 font-bold primary-color">Go!</button>
+                            <button type="submit" class="fs22 font-bold primary-color">Go!</button>
                         </div>
                     </form>
                 </div>
@@ -52,8 +63,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="small-12 medium-6 medium-offset-3 columns coffee-run-form ordering-list">
-                <p class="font-book fs22 secondary-color lh120"><span class="font-bold primary-color">4 people</span> have placed their orders.<br/>
+            <div class="small-12 medium-8 medium-offset-2 large-6 large-offset-3 columns coffee-run-form ordering-list">
+                <p class="font-book fs22 secondary-color lh150"><span class="font-bold primary-color">4 people</span> have placed their orders.<br/>
                 <span class="font-bold primary-color">2 people</span> are still ordering.</p>
 
                 <div class="people-list">
@@ -70,6 +81,7 @@
         </footer>
         <script src="js/vendor/jquery.js"></script>
         <script src="js/foundation.min.js"></script>
+        <script src="js/coffee-run.js"></script>
         <script>
             $(document).foundation();
         </script>
