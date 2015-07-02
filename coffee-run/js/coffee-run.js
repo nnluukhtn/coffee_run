@@ -6,6 +6,10 @@ $(document).ready(function(){
 		$("#order-form").addClass("sending").delay(500).queue(function(next){
 		    $(this).addClass("submitted");
 		    next();
+
+		   	if($('running-list').hasClass('active') == false){
+		   		$('.running-list').toggleClass('active');
+		   	}
 		});
 	});
 
@@ -16,6 +20,10 @@ $(document).ready(function(){
 		}
 
 	);
+
+	$('.expansion-link a').click(function(){
+		$('.running-list').toggleClass('active');
+	});
 });
 
 function validateForm() {
