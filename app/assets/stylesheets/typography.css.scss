@@ -1,0 +1,40 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:700,400);
+@import url(http://fonts.googleapis.com/css?family=Roboto+Mono);
+
+/* typeface classes */
+.font-book {
+    font-family: "Open Sans", "Helvetica Neue", "Helvetica" ,Helvetica, Arial, sans-serif;
+}
+.font-bold {
+    font-family: "Open Sans", "Helvetica Neue", "Helvetica" ,Helvetica, Arial, sans-serif;
+    font-weight: 700;
+}
+.font-mono {
+    font-family: "Roboto Mono", "Helvetica Neue", "Helvetica" ,Helvetica, Arial, sans-serif;
+}
+
+/* font sizes */
+.fs14 {
+    font-size: 0.875em;
+}
+
+.fs22 {
+    font-size: 1.375em;
+}
+
+.fs36 {
+    font-size: 2.25em;
+}
+
+/* line height */
+.lh150 {
+    line-height: 150%;
+}
+
+.lh30 {
+    line-height: 136%;
+}
+
+.lh40 {
+    line-height: 111%;
+}

@@ -12,5 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.countdown.min
+//= require jquery.cookie
+//= require foundation
 //= require turbolinks
-//= require_tree .
+//= require jquery.tzoffset
+//= require simpleStorage
+
+$(function(){ $(document).foundation(); });

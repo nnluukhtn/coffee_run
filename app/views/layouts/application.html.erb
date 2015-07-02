@@ -2,13 +2,26 @@
 <html>
 <head>
   <title>CoffeeRun</title>
+  <%= include_gon %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
 
-<%= yield %>
+  <%= render "partials/header"%>
+  <!--[if lt IE 10]> <p style="text-align:center;color:#666;margin:0;background-color:#e9e9e9;padding:5px;border-top:1px #ddd solid;border-bottom:solid 1px #ddd;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p> <![endif]-->
+
+  <section class="clearfix main-section" id="main-section">
+    <%= yield %>
+  </section>
+  <%= render "partials/footer"%>
+
+  <%= javascript_include_tag "vendor/modernizr" %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <script src="//js.pusher.com/2.2/pusher.min.js"></script>
+  <%= javascript_include_tag "pusher" ,  :media => "all" %>
+  <%= content_for?(:js_file) ? yield(:js_file) : "" %>
 
 </body>
 </html>
