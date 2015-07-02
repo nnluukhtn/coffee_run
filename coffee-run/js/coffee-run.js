@@ -2,6 +2,11 @@ $(document).ready(function(){
 	$('#coffee-form').submit(function(e){
 		e.preventDefault();
 		validateForm();
+
+		$("#order-form").addClass("sending").delay(500).queue(function(next){
+		    $(this).addClass("submitted");
+		    next();
+		});
 	});
 
 	$('.warning').hover(function(){

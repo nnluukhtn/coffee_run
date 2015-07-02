@@ -210,18 +210,30 @@ a:focus {
 }
 
 #order-form {
+	opacity: 1;
 	transition: all 0.5s cubic-bezier(.53,0,1,-0.54);
 }
 
-/*#order-form:hover {
+#order-form.submitted {
 	visibility: hidden;
 	margin-top: -100%;
-}*/
+}
+
+#order-form.sending {
+	opacity: 0.2;
+}
+
+.running-list,.runned-list {
+	margin-bottom: 100px;
+}
 
 footer {
+	position: fixed;
 	width: 100%;
-	margin: 30px auto 10px;
-	bottom: 0;
+	bottom: 20px;
+	left: 0;
+	right: 0;
+	z-index: -1;
 	text-align: center;
 }
 
