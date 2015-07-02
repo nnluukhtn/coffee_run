@@ -66,7 +66,7 @@ a:focus {
 
 .input-field label {
 	position: absolute;
-	top: 26px;
+	top: 23px;
 }
 
 .input-field input[type="text"] {
@@ -75,13 +75,13 @@ a:focus {
 	vertical-align: middle;
 	float: left;
 	padding-left: 160px;
-	padding-top: 12px;
 	background-color: transparent;
 	border: none;
 	box-shadow: none;
 	border-bottom: dashed 1px #D8D8D8;
 	font-size: 22px;
 	font-family: 'Open Sans';
+	line-height: 29px;
 	color: #253DD3;
 	margin: 22px 0 0 0;
 }
