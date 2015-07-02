@@ -228,6 +228,16 @@ footer {
 	margin-bottom: 120px;
 }
 
+#order-form {
+  transition: all 0.5s cubic-bezier(.53,0,1,-0.54);
+	opacity: 1;
+}
+
+#order-form.submitted {
+	visibility: hidden;
+	margin-top: -100%;
+}
+
 @media only screen and (min-device-width : 320px) and (max-device-width : 568px) {
 	body {
 		padding: 0 6px;

@@ -164,13 +164,20 @@ $(document).ready( function (){
           url: action,
           data: serializedForm,
           success: function (response) {
-            $(".ordering").hide("slow", function(){
-              $(".running-list").hide("slow", function() {
-                var parent = $(this).parent();
-                $(this).remove();
-                parent.append(response);
-              });
+            $("#order-form").addClass("submitted");
+
+            $(".running-list").hide("slow", function() {
+              var parent = $(this).parent();
+              $(this).remove();
+              parent.append(response);
             });
+            // $(".ordering").hide("slow", function(){
+            //   $(".running-list").hide("slow", function() {
+            //     var parent = $(this).parent();
+            //     $(this).remove();
+            //     parent.append(response);
+            //   });
+            // });
             pusher.unsubscribe("presence-runs_channel-" + gon.no);
           },
           dataType: 'HTML'
