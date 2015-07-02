@@ -1,12 +1,16 @@
 $(document).ready(function(){
 	$('#coffee-form').submit(function(e){
 		e.preventDefault();
-		validateForm();
+		if(validateForm()){
+			$("#order-form").addClass("sending").delay(500).queue(function(next){
+			    $(this).addClass("submitted");
+			    next();
 
-		$("#order-form").addClass("sending").delay(500).queue(function(next){
-		    $(this).addClass("submitted");
-		    next();
-		});
+			   	if($('.running-list').hasClass('active') == false){
+			   		$('.running-list').toggleClass('active');
+			   	} 
+			});
+		}
 	});
 
 	$('.warning').hover(function(){
@@ -16,6 +20,11 @@ $(document).ready(function(){
 		}
 
 	);
+
+	$('.expansion-link a').click(function(){
+		$('.running-list').toggleClass('active');
+		$("html, body").animate({ scrollTop: $(document).height() }, 800);
+	});
 });
 
 function validateForm() {
