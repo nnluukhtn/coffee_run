@@ -1,0 +1,249 @@
+$(document).ready( function (){
+  if (!gon.ordered) {
+    var channel = pusher.subscribe("presence-runs_channel-" + gon.no);
+    channel.bind("pusher:subscription_succeeded", function(_members) {
+      _members.each(function(member) {
+        add_member(member.id, member.info);
+      });
+      update_ordering_people();
+
+      if (!simpleStorage.get("reloaded")) {
+        simpleStorage.set("reloaded", true, {TTL: 86400000});
+      }
+    });
+
+    channel.bind('pusher:member_added', function(member) {
+      add_member(member.id, member.info);
+      update_ordering_people();
+    });
+
+    channel.bind('pusher:member_removed', function(member) {
+      remove_member(member.id, member.info);
+      update_ordering_people();
+    });
+
+    var isGibberish = function(s) {
+
+    	/*
+    		Checking if the input is gibberish to prevent spam
+    		Credit by Arty Effem (http://www.webdeveloper.com/forum/showthread.php?157846.html)
+
+    		This simple algorithm checks the ratio between vows/consonances in an input.
+    	*/
+
+    	var v=1, c=1, ratio, len, gibberish=false;
+
+    	if(typeof s != 'undefined' && s.length) {
+    		len=s.length;
+
+    		for(var i=0; i<len; i++) {
+    			if(/[aeiou]/i.test(s.charAt(i))) {
+    				v++;
+    			} else if(/[bcdfghjklmnpqrstvwxyz]/i.test(s.charAt(i))) {
+    		 		c++;
+    		 	}
+    		}
+
+    		ratio=v/(c+v);
+
+    		if(ratio < 0.3 || ratio >0.6) {
+    			gibberish=true;
+    		}
+    	}
+
+    	return gibberish;
+    };
+
+    var validate_order_beverage = function(_isValid) {
+      var isValid = _isValid;
+      var ordererBeverage = $('#orderer-beverage input').val();
+
+      if(ordererBeverage == null || ordererBeverage == "") {
+      	$('#orderer-beverage .warning').removeClass('hide');
+      	$('#orderer-beverage .validation-text p').text("If you don't tell me what you want, I can't get you what you want.");
+      	isValid = false;
+      } else if (isGibberish(ordererBeverage)){
+      	$('#orderer-beverage .warning').removeClass('hide');
+      	$('#orderer-beverage .validation-text p').text("For the love of God, please don’t enter jibberish. You’re not a monkey!");
+      	isValid = false;
+      } else {
+        // Remove warning
+      	$('#orderer-beverage .warning').addClass("hide");
+      }
+
+      return isValid;
+    };
+
+    var validate_order_name = function (_isValid) {
+      var isValid = _isValid;
+      var ordererName = $('#orderer-name input').val();
+
+      if(ordererName == null || ordererName == "") {
+          $('#orderer-name .warning').removeClass('hide');
+          isValid = false;
+      } else {
+        // Remove warning
+      	$('#orderer-name .warning').addClass("hide");
+      }
+
+      return isValid;
+    };
+
+    var validateForm = function() {
+      var isValid = true;
+      isValid = validate_order_name(isValid);
+      isValid = validate_order_beverage(isValid);
+
+      if (isValid) {
+      	// Remove warning
+      	$('.warning').addClass('hide');
+      }
+
+      return isValid;
+    };
+
+    $(".coffee-run-timer")
+      .countdown(gon.running_time)
+      .on('update.countdown', function(event) {
+        $("#running_minutes").text(event.strftime('%M'));
+        $("#running_seconds").text(event.strftime('%S'));
+      })
+      .on('finish.countdown', function(event) {
+        $.ajax({
+          url: "/runs/runned_list",
+          type: "get",
+          data: {
+            no: gon.no
+          },
+          success: function(response) {
+            $(".ordering").hide("slow", function(){
+              $(".running-list").hide("slow", function() {
+                var parent = $(this).parent();
+                $(this).remove();
+                parent.append(response);
+              });
+            });
+          },
+          error: function(xhr) {
+            console.log("Can not get runned list");
+          }
+        });
+      });
+
+    $("#show-hide-orderers").click(function(event) {
+      // $("#show-hide-orderers").unbind('click');
+      if ($(".running-list").css("display") == "none") {
+        $("#show-hide-orderers").text("Hide what others are drinking");
+      } else {
+        $("#show-hide-orderers").text("See what others are drinking");
+      }
+      // $(".running-list").slideToggle("fast", function() {
+      // });
+      $(".running-list").toggle("fast", function () {
+        $(this).toggleClass("active");
+      });
+    });
+
+    $('.warning').hover(function(){
+      $(this).parent().find('.validation-text').removeClass('hide');
+    }, function() {
+      $(this).parent().find('.validation-text').addClass('hide');
+    });
+
+    $("#coffee-form").submit(function (e) {
+      e.preventDefault();
+      if (validateForm()) {
+        //get the form
+        var f = $("#coffee-form");
+        //get the action
+        var action = f.attr("action");
+        //get the serialized data
+        var serializedForm = f.serialize();
+        var request = $.ajax({
+          type: 'POST',
+          url: action,
+          data: serializedForm,
+          success: function (response) {
+            $(".ordering").hide("slow", function(){
+              $(".running-list").hide("slow", function() {
+                var parent = $(this).parent();
+                $(this).remove();
+                parent.append(response);
+              });
+            });
+            pusher.unsubscribe("presence-runs_channel-" + gon.no);
+          },
+          dataType: 'HTML'
+        });
+        return false;
+
+        request.done(function (msg) {
+          console.log(msg);
+        });
+
+        request.fail(function (jqXHR, textStatus) {
+          console.log("Request failed: " + textStatus);
+        });
+      } else {
+        return false;
+      }
+    });
+
+    $("#orderer-name").keyup(function (e) {
+      validate_order_name(true);
+    });
+
+    $("#orderer-beverage").keyup(function (e) {
+      validate_order_beverage(true);
+    });
+  }
+
+  var private_chanel = pusher.subscribe("private-runs_channel-" + gon.no);
+  private_chanel.bind("add_order", function(data) {
+
+    var target = null;
+    if ($(".runned-list").length > 0) {
+      target = $(".runned-list");
+    }
+    else {
+      target = $(".running-list");
+    }
+
+    target.find(".ordering-list>.people-list").append("<p class=\"font-book fs22 secondary-color\"><span class=\"primary-color\">" + data["name"] + "</span> is getting a <span class=\"primary-color\">" + data["beverage"] + "</span>.</p>");
+
+    // Update count
+    var current_count = parseInt($(".ordered-people").text());
+    $(".ordered-people").text(current_count + 1);
+
+  });
+
+  var update_ordering_people = function() {
+    var members = simpleStorage.get("members");
+    if (members.length > 1) {
+      $(".ordering-people").find("span").text(members.length);
+      var detail_text = " more person";
+      if (members.length > 2) {
+        detail_text = " more people";
+      }
+
+      $(".ordering-detail").find("span").text("You and " + (members.length - 1) + detail_text);
+      $(".ordering-people").show();
+      $(".ordering-detail").show();
+    } else {
+      $(".ordering-detail").find("span").text("You");
+      // $(".ordering-detail").hide();
+      $(".ordering-people").hide();
+    }
+  };
+
+});
+
+$(window).load( function(){
+  $(document).foundation();
+});
+
+$(window).unload(function() {
+  if (!gon.ordered && simpleStorage.get("reloaded")) {
+    // pusher.unsubscribe("presence-runs_channel-" + gon.no);
+  }
+});

@@ -1,7 +1,22 @@
+require 'sidekiq/web'
 Rails.application.routes.draw do
+
   root :to => "runs#show"
 
   # Run
-  post 'runs/create' => "runs#create", format: :json
+  post "runs/create", to: "runs#create", format: :json
+  get "runs/show", to: "runs#show"
+  get "runs/runned_list", to: "runs#runned_list"
+  get "runs/running_list", to: "runs#running_list"
+  post "runs/submit", to: "runs#submit"
+
+  # Pusher
+  post "pusher/auth", to: "pusher#auth"
+
+  # Sidekiq admin
+  Sidekiq::Web.use Rack::Auth::Basic do |username, password|
+    username == ENV["SIDEKIQ_USERNAME"] && password == ENV["SIDEKIQ_PASSWORD"]
+  end if (Rails.env.production?)
+  mount Sidekiq::Web, at: "/sidekiq"
 
 end

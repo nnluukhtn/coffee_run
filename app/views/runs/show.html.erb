@@ -1,0 +1,50 @@
+<% content_for :js_file do %>
+	<%= javascript_include_tag "runs" ,  :media => "all" %>
+<% end %>
+<div class="hidden-margin"></div>
+<% if @running_time > 0 %>
+  <div class="row ordering">
+    <div class="small-12 medium-8 medium-offset-2 large-6 large-offset-3 columns coffee-run-form">
+      <div class="order-number left">
+        <p class="font-mono fs14 secondary-color">No. <span class="primary-color"><%= @run.no.to_s.rjust(7, '0') %></span></p>
+      </div>
+      <div class="order-date right">
+        <p class="font-mono fs14 secondary-color text-right"><span><%= @run.created_at.strftime("%b %d, %Y") %></span></p>
+      </div>
+      <div class="coffee-run-timer left">
+        <p class="font-book fs22 secondary-color lh120"><span class="font-bold primary-color"><%= @run.runner %></span> is doing a coffee run in<br/>
+          <span class="font-mono" id="running_minutes"><%= (@running_time / 60).to_s.rjust(2, '0') %></span> minutes and <span class="font-mono" id="running_seconds"><%= (@running_time % 60).to_s.rjust(2, '0') %></span> seconds.</p>
+      </div>
+      <div class="actual-form left">
+        <form id="coffee-form" action="/runs/submit" method="post" data-remote="true">
+					<input type="hidden" name="no" value="<%= params[:no] %>">
+          <div id="orderer-name" class="input-field">
+            <label class="fs22 font-book secondary-color">I am</label>
+            <input class="fs22 font-book secondary-color" type="text" placeholder="What is thy name?" name="order[name]" autofocus />
+            <div class="warning hide"></div>
+            <div class="validation-text hide">
+              <p class="font-book fs16 secondary-color">Give me thy name, don't be shy!</p>
+            </div>
+          </div>
+          <div id="orderer-beverage" class="input-field">
+            <label class="fs22 font-book secondary-color">And I want a</label>
+            <input class="fs22 font-book secondary-color" type="text" placeholder="And thou shall drink?" name="order[beverage]" />
+            <div class="warning hide"></div>
+            <div class="validation-text hide">
+                <p class="font-book fs16 secondary-color"></p>
+            </div>
+          </div>
+          <div class="submit-button">
+            <button type="submit" class="fs22 font-bold primary-color">Go!</button>
+          </div>
+        </form>
+      </div>
+      <div class="expansion-link text-center left">
+        <a class="font-book primary-color fs14" href="javascript:void(0)" id="show-hide-orderers">See what others are drinking</a>
+      </div>
+    </div>
+  </div>
+  <%= render "running_list" %>
+<% else %>
+  <%= render "runned_list" %>
+<% end %>

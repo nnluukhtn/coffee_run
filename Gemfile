@@ -39,6 +39,9 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'rspec-rails'
+	gem 'guard-rspec'
+	gem 'capybara'
 end
 
 # Push notification
@@ -51,3 +54,14 @@ gem 'mongoid-autoinc', '~> 4.0.0'
 
 # Shortener url
 gem 'bitly'
+
+# Foundation
+gem 'foundation-rails'
+
+# Sideikq worker
+gem 'sidekiq'
+gem 'sinatra', require: false
+gem 'slim'
+
+# For rails variable in js
+gem 'gon'
