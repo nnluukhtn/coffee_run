@@ -147,6 +147,10 @@ a:focus {
 	background-color: #253DD3;
 }
 
+.submit-button button:focus {
+	color: #253DD3;
+}
+
 .expansion-link {
 	width: 100%;
 	margin-top: 18px;
@@ -204,6 +208,15 @@ a:focus {
 .padding-top {
 	padding-top: 80px;
 }
+
+#order-form {
+	transition: all 0.5s cubic-bezier(.53,0,1,-0.54);
+}
+
+/*#order-form:hover {
+	visibility: hidden;
+	margin-top: -100%;
+}*/
 
 footer {
 	width: 100%;
