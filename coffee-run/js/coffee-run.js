@@ -1,15 +1,22 @@
 $(document).ready(function(){
 	$('#coffee-form').submit(function(e){
 		e.preventDefault();
+
 		if(validateForm()){
 			$("#order-form").addClass("sending").delay(500).queue(function(next){
 			    $(this).addClass("submitted");
 			    next();
 
+			    $('.submit-button button .progress-bar').delay(800).animate("slow", function(){
+					$(this).css("width", "100%");
+				});
+
 			   	if($('.running-list').hasClass('active') == false){
 			   		$('.running-list').toggleClass('active');
 			   	} 
 			});
+		} else {
+			$('#order-form').toggleClass('shake');
 		}
 	});
 
