@@ -37,7 +37,7 @@ class RunsController < ApplicationController
 
   # GET /runs/show
   def show
-    get_existed_run
+    get_existed_run and return
 
     gon.no = @run.no
     get_running_time
@@ -107,7 +107,11 @@ class RunsController < ApplicationController
 
   def get_existed_run
     @run = Run.find_by_no(params[:no]).to_a
-    raise CoffeeRunError.new("Run not found") if @run.empty?
+    if action_name == "show"
+      redirect_to errors_error404_path and return true
+    else
+      raise CoffeeRunError.new("Run not found") if @run.empty?
+    end
     @run = @run.first
   end
 
@@ -121,7 +125,8 @@ class RunsController < ApplicationController
   end
 
   def valid_run_params_for_show
-    raise CoffeeRunError.new("Missing or unvalid parameters") if params[:no].blank?
+    # raise CoffeeRunError.new("Missing or unvalid parameters") if params[:no].blank?
+    redirect_to errors_error404_path if params[:no].blank?
   end
 
   def validate_order_params_for_submit

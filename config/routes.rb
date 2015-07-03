@@ -1,6 +1,8 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
 
+  get 'errors/error404'
+
   # Run
   post "runs/create", to: "runs#create", format: :json
   get "runs/show", to: "runs#show"
@@ -16,5 +18,7 @@ Rails.application.routes.draw do
     username == ENV["SIDEKIQ_USERNAME"] && password == ENV["SIDEKIQ_PASSWORD"]
   end if (Rails.env.production?)
   mount Sidekiq::Web, at: "/sidekiq"
+
+  match "/404" => "errors#error404", via: [ :get, :post, :patch, :delete ]
 
 end
