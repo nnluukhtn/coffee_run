@@ -1,4 +1,5 @@
-<% if @orderers.count > 0 %>
+<% if @running_time > 0 %>
+<% elsif @orderers.count > 0 %>
   <div class="row runned-list">
     <div class="small-12 medium-8 medium-offset-2 large-6 large-offset-3 columns coffee-run-form ordering-list">
       <p class="font-book fs22 secondary-color lh150"><span class="font-bold primary-color ordered-people"><%= @orderers.count %></span> people have placed their orders.</p><span class="ordering-people" style="display: none"><br/><span class="font-bold primary-color"></span> people are still ordering.</span></p>

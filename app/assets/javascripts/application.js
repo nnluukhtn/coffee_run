@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.countdown.min
+//= require jquery.countdown
 //= require jquery.cookie
 //= require foundation
 //= require turbolinks

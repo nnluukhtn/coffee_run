@@ -40,13 +40,8 @@ class RunsController < ApplicationController
     get_existed_run
 
     gon.no = @run.no
+    get_running_time
 
-    current_time = Time.now.utc
-    if session[:ordered] == "true"
-      @running_time = 0
-    else
-      @running_time = (@run.expired_at > current_time) ? (@run.expired_at - current_time).round : 0
-    end
     gon.running_time = @run.expired_at.strftime("%Y/%m/%d %H:%M:%S")
     gon.ordered = (@running_time == 0) ? true : false
 
@@ -58,6 +53,7 @@ class RunsController < ApplicationController
     if request.xhr?
       get_existed_run
       get_orderers
+      get_running_time
 
       render :partial => "runned_list", :content_type => "text/html"
     else
@@ -70,6 +66,7 @@ class RunsController < ApplicationController
     if request.xhr?
       get_existed_run
       get_orderers
+      get_running_time
 
       render :partial => "running_list", :content_type => "text/html"
     else
@@ -90,6 +87,7 @@ class RunsController < ApplicationController
         beverage: params[:order][:beverage]
       })
       session[:ordered] = "true"
+      get_running_time
 
       render :partial => "runned_list", :content_type => "text/html"
     else
@@ -160,6 +158,15 @@ class RunsController < ApplicationController
   	end
 
   	return gibberish
+  end
+
+  def get_running_time
+    current_time = Time.now.utc
+    if session[:ordered] == "true"
+      @running_time = 0
+    else
+      @running_time = (@run.expired_at > current_time) ? (@run.expired_at - current_time).round : 0
+    end
   end
 
 end

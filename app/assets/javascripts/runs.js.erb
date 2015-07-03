@@ -6,10 +6,6 @@ $(document).ready( function (){
         add_member(member.id, member.info);
       });
       update_ordering_people();
-
-      if (!simpleStorage.get("reloaded")) {
-        simpleStorage.set("reloaded", true, {TTL: 86400000});
-      }
     });
 
     channel.bind('pusher:member_added', function(member) {
@@ -116,13 +112,17 @@ $(document).ready( function (){
             no: gon.no
           },
           success: function(response) {
-            $(".ordering").hide("slow", function(){
-              $(".running-list").hide("slow", function() {
-                var parent = $(this).parent();
-                $(this).remove();
-                parent.append(response);
+            if (response) {
+              $(".ordering").hide("slow", function(){
+                $(".running-list").hide("slow", function() {
+                  var parent = $(this).parent();
+                  $(this).remove();
+                  parent.append(response);
+                });
               });
-            });
+            } else {
+
+            }
           },
           error: function(xhr) {
             console.log("Can not get runned list");
@@ -132,16 +132,18 @@ $(document).ready( function (){
 
     $("#show-hide-orderers").click(function(event) {
       // $("#show-hide-orderers").unbind('click');
-      if ($(".running-list").css("display") == "none") {
-        $("#show-hide-orderers").text("Hide what others are drinking");
-      } else {
+      if ($(".running-list").hasClass("active")) {
         $("#show-hide-orderers").text("See what others are drinking");
+        $("html, body").animate({ scrollTop: 0 }, 500);
+      } else {
+        $("#show-hide-orderers").text("Hide what others are drinking");
+        $("html, body").animate({ scrollTop: $(document).height() }, 800);
       }
-      // $(".running-list").slideToggle("fast", function() {
+      $('.running-list').toggleClass('active');
+      $("input[name='order[name]']").focus();
+      // $(".running-list").toggle("fast", function () {
+      //   $(this).toggleClass("active");
       // });
-      $(".running-list").toggle("fast", function () {
-        $(this).toggleClass("active");
-      });
     });
 
     $('.warning').hover(function(){
@@ -149,6 +151,22 @@ $(document).ready( function (){
     }, function() {
       $(this).parent().find('.validation-text').addClass('hide');
     });
+
+    var shake_from = function () {
+      // create a deferred object
+      var r = $.Deferred();
+
+      // do whatever you want (e.g. ajax/animations other asyc tasks)
+      $('#order-form').addClass('shake');
+
+      setTimeout(function () {
+        // and call `resolve` on the deferred object, once you're done
+        r.resolve();
+      }, 600);
+
+      // return the deferred object
+      return r;
+    };
 
     $("#coffee-form").submit(function (e) {
       e.preventDefault();
@@ -164,21 +182,25 @@ $(document).ready( function (){
           url: action,
           data: serializedForm,
           success: function (response) {
-            $("#order-form").addClass("submitted");
+            if (response) {
+              $("#order-form").addClass("sending").delay(500).queue(function(next) {
+                $(this).addClass("submitted");
+                // if($('.running-list').hasClass('active') == false){
+                //   $('.running-list').toggleClass('active');
+                // }
+                $('.running-list').remove();
+                $('.submit-button button .progress-bar').delay(800).animate("slow", function(){
+                  $(this).css("width", "100%");
+                });
+                $(this).parent().append(response);
+                next();
+              });
 
-            $(".running-list").hide("slow", function() {
-              var parent = $(this).parent();
-              $(this).remove();
-              parent.append(response);
-            });
-            // $(".ordering").hide("slow", function(){
-            //   $(".running-list").hide("slow", function() {
-            //     var parent = $(this).parent();
-            //     $(this).remove();
-            //     parent.append(response);
-            //   });
-            // });
-            pusher.unsubscribe("presence-runs_channel-" + gon.no);
+              pusher.unsubscribe("presence-runs_channel-" + gon.no);
+            }
+            else {
+
+            }
           },
           dataType: 'HTML'
         });
@@ -192,6 +214,9 @@ $(document).ready( function (){
           console.log("Request failed: " + textStatus);
         });
       } else {
+        shake_from().done(function() {
+          $('#order-form').removeClass('shake');
+        });
         return false;
       }
     });
@@ -250,7 +275,7 @@ $(window).load( function(){
 });
 
 $(window).unload(function() {
-  if (!gon.ordered && simpleStorage.get("reloaded")) {
+  if (!gon.ordered) {
     // pusher.unsubscribe("presence-runs_channel-" + gon.no);
   }
 });

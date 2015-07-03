@@ -7,7 +7,7 @@ Pusher.log = function(message) {
 
 var pusher = new Pusher('e513ae0db2f71c44d4e0');
 simpleStorage.set("members", [], {TTL: 86400000}); // Expires in 24 hours
-var pendingRemoves = []
+// var pendingRemoves = []
 
 var pluck_by_id = function(in_arr, id, exists) {
   for (i = 0; i < in_arr.length; i++ ) {
