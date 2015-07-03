@@ -1,8 +1,6 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
 
-  get 'errors/error404'
-
   # Run
   post "runs/create", to: "runs#create", format: :json
   get "runs/show", to: "runs#show"

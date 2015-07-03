@@ -108,7 +108,7 @@ class RunsController < ApplicationController
   def get_existed_run
     @run = Run.find_by_no(params[:no]).to_a
     if action_name == "show"
-      redirect_to errors_error404_path and return true
+      redirect_to "/404" and return true
     else
       raise CoffeeRunError.new("Run not found") if @run.empty?
     end
@@ -126,7 +126,7 @@ class RunsController < ApplicationController
 
   def valid_run_params_for_show
     # raise CoffeeRunError.new("Missing or unvalid parameters") if params[:no].blank?
-    redirect_to errors_error404_path if params[:no].blank?
+    redirect_to "/404" if params[:no].blank?
   end
 
   def validate_order_params_for_submit
