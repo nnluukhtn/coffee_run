@@ -1,5 +1,6 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
+  root to: "home#about"
 
   # Run
   post "runs/create", to: "runs#create", format: :json
@@ -10,6 +11,9 @@ Rails.application.routes.draw do
 
   # Pusher
   post "pusher/auth", to: "pusher#auth"
+
+  # Home
+  get "/about", to: "home#about"
 
   # Sidekiq admin
   Sidekiq::Web.use Rack::Auth::Basic do |username, password|
