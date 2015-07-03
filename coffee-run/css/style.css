@@ -1,4 +1,5 @@
 body {
+	height: 100%;
 	background-color: #4C494F;
 	position: relative;
 }
@@ -140,6 +141,21 @@ a:focus {
 	background-color: transparent;
 	border: solid 3px #253DD3;
 	margin: 30px 0 0 0;
+	z-index: 2;
+}
+
+.submit-button button .progress-bar.background-horizontal {
+	height: 100%;
+}
+
+.submit-button button .progress-bar {
+	background-color: #253DD3;
+	bottom: 0;
+	left: 0;
+	width: 0;
+	position: absolute;
+	z-index: 1;
+	transition: width 0.5s, height 0.5s;
 }
 
 .submit-button button:hover {
@@ -149,6 +165,7 @@ a:focus {
 
 .submit-button button:focus {
 	color: #253DD3;
+	background-color: transparent;
 }
 
 .expansion-link {
@@ -223,6 +240,99 @@ a:focus {
 	opacity: 0.2;
 }
 
+.shake {
+	animation-duration: 400ms;
+	-webkit-animation-duration: 400ms;
+	-moz-animation-duration: 400ms;
+
+	animation-timing-function: ease-in-out;
+	-webkit-animation-timing-function: ease-in-out;
+	-moz-animation-timing-function: ease-in-out;
+
+	animation-name: shakeAnimation;
+	-webkit-animation-name: shakeAnimation;
+	-moz-animation-name: shakeAnimation;
+}
+
+
+@-webkit-keyframes shakeAnimation {
+	0% {
+		-webkit-transform: translateX(0);
+	}
+
+	12.5% {
+		-webkit-transform: translateX(-10px) rotateY(-5deg);
+	}
+
+	37.5% {
+		-webkit-transform: translateX(8px) rotateY(4deg);
+	}
+
+	62.5% {
+		-webkit-transform: translateX(-6px) rotateY(-2deg);
+	}
+
+	87.5% {
+		-webkit-transform: translateX(4px) rotateY(1deg);
+	}
+
+	100% {
+		-webkit-transform: translateX(0);
+	}
+}
+
+@-moz-keyframes shakeAnimation {
+	0% {
+		-webkit-transform: translateX(0);
+	}
+
+	12.5% {
+		-webkit-transform: translateX(-10px) rotateY(-5deg);
+	}
+
+	37.5% {
+		-webkit-transform: translateX(8px) rotateY(4deg);
+	}
+
+	62.5% {
+		-webkit-transform: translateX(-6px) rotateY(-2deg);
+	}
+
+	87.5% {
+		-webkit-transform: translateX(4px) rotateY(1deg);
+	}
+
+	100% {
+		-webkit-transform: translateX(0);
+	}
+}
+
+@keyframes shakeAnimation {
+	0% {
+		-webkit-transform: translateX(0);
+	}
+
+	12.5% {
+		-webkit-transform: translateX(-10px) rotateY(-5deg);
+	}
+
+	37.5% {
+		-webkit-transform: translateX(8px) rotateY(4deg);
+	}
+
+	62.5% {
+		-webkit-transform: translateX(-6px) rotateY(-2deg);
+	}
+
+	87.5% {
+		-webkit-transform: translateX(4px) rotateY(1deg);
+	}
+
+	100% {
+		-webkit-transform: translateX(0);
+	}
+}
+
 .running-list {
 	transform: perspective(500px) rotateX(-.25turn);
 	transform-origin: 50% 0;
@@ -275,6 +385,10 @@ footer {
 
 	.actual-form {
 		margin-top: 0;
+	}
+
+	.input-field label {
+		top: 26px;
 	}
 
 	.input-field input[type="text"] {
