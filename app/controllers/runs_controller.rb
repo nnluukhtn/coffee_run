@@ -107,10 +107,12 @@ class RunsController < ApplicationController
 
   def get_existed_run
     @run = Run.find_by_no(params[:no]).to_a
-    if action_name == "show"
-      redirect_to "/404" and return true
-    else
-      raise CoffeeRunError.new("Run not found") if @run.empty?
+    if @run.empty?
+      if action_name == "show"
+        redirect_to "/404" and return true
+      else
+        raise CoffeeRunError.new("Run not found")
+      end
     end
     @run = @run.first
   end
