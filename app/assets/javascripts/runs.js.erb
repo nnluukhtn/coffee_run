@@ -1,4 +1,8 @@
 $(document).ready( function (){
+  $(window).load(function() {
+    $("body").removeClass("preload");
+  });
+  
   if (!gon.ordered) {
     var channel = pusher.subscribe("presence-runs_channel-" + gon.no);
     channel.bind("pusher:subscription_succeeded", function(_members) {

@@ -12,6 +12,13 @@ a:focus {
 	color: #253DD3;
 }
 
+.preload * {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+}
+
 .header {
 	width: 100%;
 	padding-top: 36px;
@@ -237,29 +244,29 @@ footer {
 }
 
 .running-list {
+	-webkit-transform: perspective(500px) rotateX(-.25turn);
+	-moz-transform: perspective(500px) rotateX(-.25turn);
 	transform: perspective(500px) rotateX(-.25turn);
+
+	-webkit-transform-origin: 50% 0;
+	-moz-transform-origin: 50% 0;
 	transform-origin: 50% 0;
+
+	-webkit-transition: .2s;
+	-moz-transition: .2s;
 	transition: .2s;
 }
 
 .shake {
-	animation-duration: 400ms;
-	-webkit-animation-duration: 400ms;
-	-moz-animation-duration: 400ms;
-
-	animation-timing-function: ease-in-out;
-	-webkit-animation-timing-function: ease-in-out;
-	-moz-animation-timing-function: ease-in-out;
-
-	animation-name: shakeAnimation;
-	-webkit-animation-name: shakeAnimation;
-	-moz-animation-name: shakeAnimation;
+	-webkit-animation: shakeAnimation 0.4s;
+	-moz-animation: shakeAnimation 0.4s;
+	animation: shakeAnimation 0.4s;
 }
 
 
 @-webkit-keyframes shakeAnimation {
 	0% {
-		-webkit-transform: translateX(0);
+		-webkit-transform: translateX(0px);
 	}
 
 	12.5% {
@@ -279,63 +286,65 @@ footer {
 	}
 
 	100% {
-		-webkit-transform: translateX(0);
+		-webkit-transform: translateX(0px);
 	}
 }
 
 @-moz-keyframes shakeAnimation {
 	0% {
-		-webkit-transform: translateX(0);
+		-moz-transform: translateX(0px);
 	}
 
 	12.5% {
-		-webkit-transform: translateX(-10px) rotateY(-5deg);
+		-moz-transform: translateX(-10px) rotateY(-5deg);
 	}
 
 	37.5% {
-		-webkit-transform: translateX(8px) rotateY(4deg);
+		-moz-transform: translateX(8px) rotateY(4deg);
 	}
 
 	62.5% {
-		-webkit-transform: translateX(-6px) rotateY(-2deg);
+		-moz-transform: translateX(-6px) rotateY(-2deg);
 	}
 
 	87.5% {
-		-webkit-transform: translateX(4px) rotateY(1deg);
+		-moz-transform: translateX(4px) rotateY(1deg);
 	}
 
 	100% {
-		-webkit-transform: translateX(0);
+		-moz-transform: translateX(0px);
 	}
 }
 
 @keyframes shakeAnimation {
 	0% {
-		-webkit-transform: translateX(0);
+		transform: translateX(0px);
 	}
 
 	12.5% {
-		-webkit-transform: translateX(-10px) rotateY(-5deg);
+		transform: translateX(-10px) rotateY(-5deg);
 	}
 
 	37.5% {
-		-webkit-transform: translateX(8px) rotateY(4deg);
+		transform: translateX(8px) rotateY(4deg);
 	}
 
 	62.5% {
-		-webkit-transform: translateX(-6px) rotateY(-2deg);
+		transform: translateX(-6px) rotateY(-2deg);
 	}
 
 	87.5% {
-		-webkit-transform: translateX(4px) rotateY(1deg);
+		transform: translateX(4px) rotateY(1deg);
 	}
 
 	100% {
-		-webkit-transform: translateX(0);
+		transform: translateX(0px);
 	}
 }
 
 .running-list.active {
+	-webkit-transform: none;
+	-moz-transform: none;
 	transform: none;
 }
 
