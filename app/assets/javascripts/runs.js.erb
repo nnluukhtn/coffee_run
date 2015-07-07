@@ -2,7 +2,7 @@ $(document).ready( function (){
   $(window).load(function() {
     $("body").removeClass("preload");
   });
-  
+
   if (!gon.ordered) {
     var channel = pusher.subscribe("presence-runs_channel-" + gon.no);
     channel.bind("pusher:subscription_succeeded", function(_members) {
@@ -166,7 +166,7 @@ $(document).ready( function (){
       setTimeout(function () {
         // and call `resolve` on the deferred object, once you're done
         r.resolve();
-      }, 600);
+      }, 800);
 
       // return the deferred object
       return r;

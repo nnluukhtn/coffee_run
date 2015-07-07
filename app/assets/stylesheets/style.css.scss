@@ -257,14 +257,7 @@ footer {
 	transition: .2s;
 }
 
-.shake {
-	-webkit-animation: shakeAnimation 0.4s;
-	-moz-animation: shakeAnimation 0.4s;
-	animation: shakeAnimation 0.4s;
-}
-
-
-@-webkit-keyframes shakeAnimation {
+@-webkit-keyframes shake {
 	0% {
 		-webkit-transform: translateX(0px);
 	}
@@ -290,7 +283,7 @@ footer {
 	}
 }
 
-@-moz-keyframes shakeAnimation {
+@-moz-keyframes shake {
 	0% {
 		-moz-transform: translateX(0px);
 	}
@@ -316,7 +309,7 @@ footer {
 	}
 }
 
-@keyframes shakeAnimation {
+@keyframes shake {
 	0% {
 		transform: translateX(0px);
 	}
@@ -342,6 +335,12 @@ footer {
 	}
 }
 
+.shake {
+	-webkit-animation: shake 0.4s infinite;
+	-moz-animation: shake 0.4s infinite;
+	animation: shake 0.4s infinite;
+}
+
 .running-list.active {
 	-webkit-transform: none;
 	-moz-transform: none;
@@ -360,6 +359,9 @@ footer {
 }
 
 #order-form {
+	display: block;
+	-webkit-transition: all 0.5s cubic-bezier(.53,0,1,-0.54);
+	-moz-transition: all 0.5s cubic-bezier(.53,0,1,-0.54);
   transition: all 0.5s cubic-bezier(.53,0,1,-0.54);
 	opacity: 1;
 }
