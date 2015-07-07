@@ -346,8 +346,8 @@ footer {
 // }
 
 #main-section {
+	height: 100%;
 	padding-top: 120px;
-	padding-bottom: 120px;
 }
 
 #order-form {
@@ -371,6 +371,10 @@ footer {
 @media only screen and (min-device-width : 320px) and (max-device-width : 568px) {
 	body {
 		padding: 0 6px;
+	}
+
+	#main-section {
+		padding-top: 31px;
 	}
 
 	.mobile-header {
@@ -428,9 +432,4 @@ footer {
 	// .hidden-margin {
 	// 	margin-bottom: 60px;
 	// }
-
-	#main-section {
-		padding-top: 60px;
-		padding-bottom: 60px;
-	}
 }
