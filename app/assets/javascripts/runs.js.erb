@@ -1,4 +1,9 @@
 $(document).ready( function (){
+
+  $(window).load(function() {
+    $("body").removeClass("preload");
+  });
+
   if (!gon.ordered) {
     var channel = pusher.subscribe("presence-runs_channel-" + gon.no);
     channel.bind("pusher:subscription_succeeded", function(_members) {
@@ -162,11 +167,14 @@ $(document).ready( function (){
       setTimeout(function () {
         // and call `resolve` on the deferred object, once you're done
         r.resolve();
-      }, 600);
+      }, 800);
 
       // return the deferred object
       return r;
     };
+
+    //to check if invalid form input for the first time
+    var failValidation = 0;
 
     $("#coffee-form").submit(function (e) {
       e.preventDefault();
@@ -217,16 +225,23 @@ $(document).ready( function (){
         shake_from().done(function() {
           $('#order-form').removeClass('shake');
         });
+        failValidation ++;
+        console.log(failValidation);
         return false;
       }
     });
 
+    //validation on key press kicks in after failing for first time to enhance UX
     $("#orderer-name").keyup(function (e) {
-      validate_order_name(true);
+      if(failValidation >= 1) {
+        validate_order_name(true);
+      }
     });
 
     $("#orderer-beverage").keyup(function (e) {
-      validate_order_beverage(true);
+      if(failValidation >= 1) {
+        validate_order_beverage(true);
+      }
     });
   }
 

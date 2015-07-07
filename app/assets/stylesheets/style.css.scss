@@ -12,6 +12,13 @@ a:focus {
 	color: #253DD3;
 }
 
+.preload * {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+}
+
 .header {
 	width: 100%;
 	padding-top: 36px;
@@ -186,6 +193,7 @@ a:focus {
 .ordering-list {
 	margin-top: 20px;
 	padding-top: 36px;
+	margin-bottom: 100px;
 }
 
 .people-list {
@@ -237,105 +245,106 @@ footer {
 }
 
 .running-list {
+	-webkit-transform: perspective(500px) rotateX(-.25turn);
+	-moz-transform: perspective(500px) rotateX(-.25turn);
 	transform: perspective(500px) rotateX(-.25turn);
+
+	-webkit-transform-origin: 50% 0;
+	-moz-transform-origin: 50% 0;
 	transform-origin: 50% 0;
+
+	-webkit-transition: .2s;
+	-moz-transition: .2s;
 	transition: .2s;
 }
 
+@-webkit-keyframes shake {
+	0% {
+		-webkit-transform: translateX(0px);
+	}
+
+	12.5% {
+		-webkit-transform: translateX(-10px) rotateY(-5deg);
+	}
+
+	37.5% {
+		-webkit-transform: translateX(8px) rotateY(4deg);
+	}
+
+	62.5% {
+		-webkit-transform: translateX(-6px) rotateY(-2deg);
+	}
+
+	87.5% {
+		-webkit-transform: translateX(4px) rotateY(1deg);
+	}
+
+	100% {
+		-webkit-transform: translateX(0px);
+	}
+}
+
+@-moz-keyframes shake {
+	0% {
+		-moz-transform: translateX(0px);
+	}
+
+	12.5% {
+		-moz-transform: translateX(-10px) rotateY(-5deg);
+	}
+
+	37.5% {
+		-moz-transform: translateX(8px) rotateY(4deg);
+	}
+
+	62.5% {
+		-moz-transform: translateX(-6px) rotateY(-2deg);
+	}
+
+	87.5% {
+		-moz-transform: translateX(4px) rotateY(1deg);
+	}
+
+	100% {
+		-moz-transform: translateX(0px);
+	}
+}
+
+@keyframes shake {
+	0% {
+		transform: translateX(0px);
+	}
+
+	12.5% {
+		transform: translateX(-10px) rotateY(-5deg);
+	}
+
+	37.5% {
+		transform: translateX(8px) rotateY(4deg);
+	}
+
+	62.5% {
+		transform: translateX(-6px) rotateY(-2deg);
+	}
+
+	87.5% {
+		transform: translateX(4px) rotateY(1deg);
+	}
+
+	100% {
+		transform: translateX(0px);
+	}
+}
+
 .shake {
-	animation-duration: 400ms;
-	-webkit-animation-duration: 400ms;
-	-moz-animation-duration: 400ms;
-
-	animation-timing-function: ease-in-out;
-	-webkit-animation-timing-function: ease-in-out;
-	-moz-animation-timing-function: ease-in-out;
-
-	animation-name: shakeAnimation;
-	-webkit-animation-name: shakeAnimation;
-	-moz-animation-name: shakeAnimation;
-}
-
-
-@-webkit-keyframes shakeAnimation {
-	0% {
-		-webkit-transform: translateX(0);
-	}
-
-	12.5% {
-		-webkit-transform: translateX(-10px) rotateY(-5deg);
-	}
-
-	37.5% {
-		-webkit-transform: translateX(8px) rotateY(4deg);
-	}
-
-	62.5% {
-		-webkit-transform: translateX(-6px) rotateY(-2deg);
-	}
-
-	87.5% {
-		-webkit-transform: translateX(4px) rotateY(1deg);
-	}
-
-	100% {
-		-webkit-transform: translateX(0);
-	}
-}
-
-@-moz-keyframes shakeAnimation {
-	0% {
-		-webkit-transform: translateX(0);
-	}
-
-	12.5% {
-		-webkit-transform: translateX(-10px) rotateY(-5deg);
-	}
-
-	37.5% {
-		-webkit-transform: translateX(8px) rotateY(4deg);
-	}
-
-	62.5% {
-		-webkit-transform: translateX(-6px) rotateY(-2deg);
-	}
-
-	87.5% {
-		-webkit-transform: translateX(4px) rotateY(1deg);
-	}
-
-	100% {
-		-webkit-transform: translateX(0);
-	}
-}
-
-@keyframes shakeAnimation {
-	0% {
-		-webkit-transform: translateX(0);
-	}
-
-	12.5% {
-		-webkit-transform: translateX(-10px) rotateY(-5deg);
-	}
-
-	37.5% {
-		-webkit-transform: translateX(8px) rotateY(4deg);
-	}
-
-	62.5% {
-		-webkit-transform: translateX(-6px) rotateY(-2deg);
-	}
-
-	87.5% {
-		-webkit-transform: translateX(4px) rotateY(1deg);
-	}
-
-	100% {
-		-webkit-transform: translateX(0);
-	}
+	-webkit-animation: shake 0.4s infinite;
+	-moz-animation: shake 0.4s infinite;
+	animation: shake 0.4s infinite;
 }
 
 .running-list.active {
+	-webkit-transform: none;
+	-moz-transform: none;
 	transform: none;
 }
 
@@ -346,11 +355,14 @@ footer {
 // }
 
 #main-section {
+	height: 100%;
 	padding-top: 120px;
-	padding-bottom: 120px;
 }
 
 #order-form {
+	display: block;
+	-webkit-transition: all 0.5s cubic-bezier(.53,0,1,-0.54);
+	-moz-transition: all 0.5s cubic-bezier(.53,0,1,-0.54);
   transition: all 0.5s cubic-bezier(.53,0,1,-0.54);
 	opacity: 1;
 }
@@ -364,13 +376,17 @@ footer {
 	opacity: 0.2;
 }
 
-.running-list,.runned-list {
+.runned-list {
 	margin-bottom: 100px;
 }
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 568px) {
 	body {
 		padding: 0 6px;
+	}
+
+	#main-section {
+		padding-top: 31px;
 	}
 
 	.mobile-header {
@@ -428,9 +444,4 @@ footer {
 	// .hidden-margin {
 	// 	margin-bottom: 60px;
 	// }
-
-	#main-section {
-		padding-top: 60px;
-		padding-bottom: 60px;
-	}
 }
