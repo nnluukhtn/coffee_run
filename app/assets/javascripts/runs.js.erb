@@ -1,4 +1,5 @@
 $(document).ready( function (){
+
   $(window).load(function() {
     $("body").removeClass("preload");
   });
@@ -172,6 +173,9 @@ $(document).ready( function (){
       return r;
     };
 
+    //to check if invalid form input for the first time
+    var failValidation = 0;
+
     $("#coffee-form").submit(function (e) {
       e.preventDefault();
       if (validateForm()) {
@@ -221,16 +225,23 @@ $(document).ready( function (){
         shake_from().done(function() {
           $('#order-form').removeClass('shake');
         });
+        failValidation ++;
+        console.log(failValidation);
         return false;
       }
     });
 
+    //validation on key press kicks in after failing for first time to enhance UX
     $("#orderer-name").keyup(function (e) {
-      validate_order_name(true);
+      if(failValidation >= 1) {
+        validate_order_name(true);
+      }
     });
 
     $("#orderer-beverage").keyup(function (e) {
-      validate_order_beverage(true);
+      if(failValidation >= 1) {
+        validate_order_beverage(true);
+      }
     });
   }
 
